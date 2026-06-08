@@ -72,11 +72,31 @@ Grab the installer for your platform from the
 
 ### A note on security warnings
 
-The current releases are **not yet code-signed (Windows) or notarized (macOS)**.
-On first launch you may see a SmartScreen / Gatekeeper warning. This is expected
-for an unsigned app — choose **"More info → Run anyway"** (Windows) or
-**right-click → Open** (macOS) to proceed. Code signing and notarization are on
-the [roadmap](#roadmap--future-improvements).
+The current releases are **not yet notarized (macOS) or code-signed (Windows)**.
+On first launch you may see a SmartScreen / Gatekeeper warning. This is expected —
+the app is safe; these warnings just mean it isn't signed with a paid certificate
+yet. Code signing and notarization are on the
+[roadmap](#roadmap--future-improvements).
+
+**Windows:** choose **"More info → Run anyway"**.
+
+**macOS (Apple Silicon):** after installing, you may see
+*"Text2DB is damaged and can't be opened. You should move it to the Trash."*
+**The app is not damaged** — this is macOS blocking an unsigned app downloaded
+from the internet. To open it:
+
+1. Drag **Text2DB** from the DMG into your **Applications** folder.
+2. Open **Terminal** and run:
+
+   ```bash
+   xattr -cr /Applications/Text2DB.app
+   ```
+
+3. Open the app normally. (If step 2 reports a permissions error, run it with
+   `sudo`.)
+
+Do **not** disable Gatekeeper system-wide (`spctl`) — the command above only
+clears the quarantine flag on this one app.
 
 You will be asked to accept the **End User License Agreement (EULA)** during
 installation.
